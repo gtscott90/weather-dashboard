@@ -62,13 +62,7 @@
             var timestamp = weatherResponse.dt;
             var date = new Date(timestamp * 1000);
             var formattedDate = (('0' + (date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2) + '/' + date.getFullYear());
-            console.log(formattedDate);
-            // var date = new Date(weatherResponse.dt).toLocaleDateString("en-US")
-            console.log(weatherResponse.dt)
             var title = weatherResponse.name + " " + formattedDate + " " + weatherResponse.weather[0].icon
-            console.log(title)
-            
-            
             var temp = "Temperature: " + weatherResponse.main.temp + " &#8457;"
             var humidity = "Humidity: " + weatherResponse.main.humidity + "%"
             var wind = "Wind Speed: " + weatherResponse.wind.speed + " MPH"
@@ -101,7 +95,7 @@
             $("#weather-display").attr("class", "border")
             });
             // forecast API Call
-            var forcastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"&units=imperial&cnt=5&appid=2208febc8fb273c894a16125286f54c1";
+            var forcastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + cityName +"&units=imperial&cnt=5&appid=2208febc8fb273c894a16125286f54c1";
             $.ajax({
             url: forcastQueryURL,
             method: "GET"
@@ -109,12 +103,15 @@
             console.log(forecastResponse)
             
             // display the 5 day forcast
-                var forecastHeading = $("<div>")
-                forecastHeading.html("<h3>5-Day Forecast:</h3>")
-                $("#forecast-display").append(forecastHeading);
+            var forecastHeading = $("<div>")
+            forecastHeading.html("<h3>5-Day Forecast:</h3>")
+            $("#forecast-display").append(forecastHeading);
             var i;
             for (i=0; i < 5; i++) {
                 // items from the response as variables
+                var timestamp = forecastResponse.list[i].dt;
+                var date = new Date(timestamp * 1000);
+                var formattedDate = (('0' + (date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2) + '/' + date.getFullYear());
                 var forecastDate = forecastResponse.list[i].dt
                 var forecastIcon = forecastResponse.list[i].weather[0].icon
                 var forecastTemp = "Temp: " + forecastResponse.list[i].main.temp + " &#8457;"
@@ -133,7 +130,7 @@
                     
                         var forecastDivDate = $("<h5>")
                         forecastDivDate.attr("class", "card-title")
-                        forecastDivDate.html(forecastDate)
+                        forecastDivDate.html(formattedDate)
                         forecastDiv.append(forecastDivDate)
 
                         var forecastDivIcon = $("<p>")
