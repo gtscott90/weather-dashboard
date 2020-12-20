@@ -59,8 +59,15 @@
             }).then(function(weatherResponse) {
             console.log(weatherResponse)
             // items from the response as variables 
-            var title = weatherResponse.name + " " + weatherResponse.dt + " " + weatherResponse.weather[0].icon
+            var timestamp = weatherResponse.dt;
+            var date = new Date(timestamp * 1000);
+            var formattedDate = (('0' + (date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2) + '/' + date.getFullYear());
+            console.log(formattedDate);
+            // var date = new Date(weatherResponse.dt).toLocaleDateString("en-US")
+            console.log(weatherResponse.dt)
+            var title = weatherResponse.name + " " + formattedDate + " " + weatherResponse.weather[0].icon
             console.log(title)
+            
             
             var temp = "Temperature: " + weatherResponse.main.temp + " &#8457;"
             var humidity = "Humidity: " + weatherResponse.main.humidity + "%"
@@ -110,7 +117,7 @@
                 // items from the response as variables
                 var forecastDate = forecastResponse.list[i].dt
                 var forecastIcon = forecastResponse.list[i].weather[0].icon
-                var forecastTemp = "High Temp: " + forecastResponse.list[i].main.temp_max + " &#8457;"
+                var forecastTemp = "Temp: " + forecastResponse.list[i].main.temp + " &#8457;"
                 var forecastHumidity = "Humidity: " + forecastResponse.list[0].main.humidity + "%"
 
                 
