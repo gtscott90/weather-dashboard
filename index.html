@@ -57,7 +57,7 @@
             method: "GET"
             }).then(function(weatherResponse) {
             console.log(weatherResponse)
-            
+            // items from the response as variables 
             var title = weatherResponse.name + " " + weatherResponse.dt + " " + weatherResponse.weather[0].icon
             console.log(title)
             
@@ -94,20 +94,28 @@
             $("#weather-display").append(uvDiv)
             $("#weather-display").attr("class", "border")
             });
-
+            // forecast API Call
             var forcastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"&units=imperial&cnt=5&appid=2208febc8fb273c894a16125286f54c1";
             $.ajax({
             url: forcastQueryURL,
             method: "GET"
             }).then(function(forecastResponse) {
             console.log(forecastResponse)
+            // items from the response as variables
+            
+            var forecastDate = forecastResponse.list[0].dt
+            var forecastIcon = forecastResponse.list[0].weather[0].icon
+            var forecastTemp = "High Temp: " + forecastResponse.list[0].main.temp_max + " &#8457;"
+            var forecastHumidity = "Humidity: " + forecastResponse.list[0].main.humidity + "%"
+
             // display the 5 day forcast
             var forecastHeading = $("<div>")
             forecastHeading.html("<h3>5-Day Forecast:</h3>")
             $("#forecast-display").append(forecastHeading);
+            
             var forecastCard = $("<div>")
             forecastCard.attr("class", "card")
-            forecastCard.attr("style", "width: 18rem;")
+            forecastCard.attr("style", "width: 15rem;")
             $("#forecast-display").append(forecastCard)
 
                 var forecastDiv = $("<div>")
@@ -116,22 +124,22 @@
                 
                     var forecastDivDate = $("<h5>")
                     forecastDivDate.attr("class", "card-title")
-                    forecastDivDate.html("<p>Date placeholder</p>")
+                    forecastDivDate.html(forecastDate)
                     forecastDiv.append(forecastDivDate)
 
                     var forecastDivIcon = $("<p>")
                     forecastDivIcon.attr("class", "card-text")
-                    forecastDivIcon.html("<p>icon placeholder</p>")
+                    forecastDivIcon.html(forecastIcon)
                     forecastDiv.append(forecastDivIcon)
 
                     var forecastDivTemp = $("<p>")
                     forecastDivTemp.attr("class", "card-text")
-                    forecastDivTemp.html("<p>temp placeholder</p>")
+                    forecastDivTemp.html(forecastTemp)
                     forecastDiv.append(forecastDivTemp)
 
                     var forecastDivHumidity = $("<p>")
                     forecastDivHumidity.attr("class", "card-text")
-                    forecastDivHumidity.html("<p>Humidity placeholder</p>")
+                    forecastDivHumidity.html(forecastHumidity)
                     forecastDiv.append(forecastDivHumidity)
 
             
