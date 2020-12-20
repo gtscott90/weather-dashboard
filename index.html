@@ -28,9 +28,8 @@
                     <button id="search"class="btn btn-primary col-md-3"><i class="fa fa-search"></i></button>  
                 </form>
                 <!-- Place for cities searched to pop up -->
-                <div class="citylist">
-                    <div class="col-12 border">city 1</div>
-                    <div class="col-12 border">city 2</div>
+                <div id="citylist">
+                    <p>Recent Searches</p>
                 </div>
             </div>
     <!-- Weather forcast area-->
@@ -64,10 +63,19 @@
             }).then(function(response) {
             console.log(response)
             });
-        })
+        // display city name is past searches 
+        var newDiv = $("<div>")
+        newDiv.attr("class", "col-12 border")
+        newDiv.text(cityName)
+        $("#citylist").append(newDiv)
+        
         // display the current weather
+
         // display the 5 day forcast
         // store searches in local storage
+        // click event for cities in the list
+        })
+        
         
     </script>
 </body>
