@@ -48,6 +48,7 @@
         $("#search").on("click", function(event){
             event.preventDefault();
             $("#weather-display").empty();
+            $("#forecast-display").empty();
             var cityName = $("#cityinput").val().trim()
             console.log(cityName)
             var weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&units=imperial&appid=2208febc8fb273c894a16125286f54c1";
@@ -62,14 +63,12 @@
             console.log(title)
             
             var temp = "Temperature: " + weatherResponse.main.temp + " &#8457;"
-
             var humidity = "Humidity: " + weatherResponse.main.humidity + "%"
             var wind = "Wind Speed: " + weatherResponse.wind.speed + " MPH"
             var uv = "UV Index: "
 
             // display the current weather
             var titleDiv = $("<h1>")
-            // titleDiv.attr("class", "display-4")
             titleDiv.html(title)
             $("#weather-display").append(titleDiv)
             
