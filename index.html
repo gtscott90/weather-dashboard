@@ -33,8 +33,18 @@
                 </div>
             </div>
     <!-- Weather forcast area-->
-        <div class="col-md-9">placeholder text
+        <div class="col-md-9">Current Weather
             <!-- Current weather display card -->
+            <div  class="jumbotron jumbotron-fluid">
+                <div id="weather-display" class="container">
+                  <!-- <h1 class="display-4">Atlanta date icon</h1>
+                  <p class="lead">Temperature: 90 F</p>
+                  <p class="lead">Humidity: 40%</p>
+                  <p class="lead">Wind Speed: 4.7 MPH</p>
+                  <p class="lead">UV Index: 9.49</p> -->
+
+                </div>
+              </div>
 
             <!-- 5 Day forcast -->
         </div>
@@ -44,7 +54,7 @@
         // run the getWeather function when the search button is clicked 
         $("#search").on("click", function(event){
             event.preventDefault();
-            // clear();
+            $("#weather-display").empty();
             var cityName = $("#cityinput").val().trim()
             console.log(cityName)
             var weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid=2208febc8fb273c894a16125286f54c1";
@@ -64,13 +74,38 @@
             console.log(response)
             });
         // display city name is past searches 
-        var newDiv = $("<div>")
-        newDiv.attr("class", "col-12 border")
-        newDiv.text(cityName)
-        $("#citylist").append(newDiv)
+            var newDiv = $("<div>")
+            newDiv.attr("class", "col-12 border")
+            newDiv.text(cityName)
+            $("#citylist").append(newDiv)
         
         // display the current weather
-
+            var titleDiv = $("<div>")
+            titleDiv.attr("class", "display-4")
+            titleDiv.html("<h1>Atlanta date icon</h1>")
+            $("#weather-display").append(titleDiv)
+            
+            var tempDiv = $("<div>")
+            tempDiv.attr("class", "lead")
+            tempDiv.html("<p>Temperature: 90 F</p>")
+            $("#weather-display").append(tempDiv)
+            
+            var humidDiv = $("<div>")
+            humidDiv.attr("class", "lead")
+            humidDiv.html("<p>Humidity: 40%</p>")
+            $("#weather-display").append(humidDiv)
+            
+            var windDiv = $("<div>")
+            windDiv.attr("class", "lead")
+            windDiv.html("<p>Wind Speed: 4.7 MPH</p>")
+            $("#weather-display").append(windDiv)
+            
+            var uvDiv = $("<div>")
+            uvDiv.attr("class", "lead")
+            uvDiv.html("<p>UV Index: 9.49</p>")
+            $("#weather-display").append(uvDiv)
+            $("#weather-display").attr("class", "border")
+    
         // display the 5 day forcast
         // store searches in local storage
         // click event for cities in the list
