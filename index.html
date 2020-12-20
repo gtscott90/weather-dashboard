@@ -22,12 +22,16 @@
                 <!-- Search bar -->
                 <form>
                     <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Search for a City:</label>
-                    <input id="citysearch" class="col-md-9">
-                    </div><button class="btn btn-primary col-md-3"><i class="fa fa-search"></i></button>  
+                    <label class="form-label">Search for a City:</label>
+                    <input id="cityinput" class="col-md-9" type="text">
+                    </div>
+                    <button id="search"class="btn btn-primary col-md-3"><i class="fa fa-search"></i></button>  
                 </form>
                 <!-- Place for cities searched to pop up -->
-                <div class="citylist"></div>
+                <div class="citylist">
+                    <div class="col-12 border">city 1</div>
+                    <div class="col-12 border">city 2</div>
+                </div>
             </div>
     <!-- Weather forcast area-->
         <div class="col-md-9">placeholder text
@@ -37,18 +41,33 @@
         </div>
     </div>
 
-    <script>
-        function getWeather(){
-            var cityName = $("#citysearch").val()
-            var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid=2208febc8fb273c894a16125286f54c1";
+    <script>      
+        // run the getWeather function when the search button is clicked 
+        $("#search").on("click", function(event){
+            event.preventDefault();
+            // clear();
+            var cityName = $("#cityinput").val().trim()
+            console.log(cityName)
+            var weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid=2208febc8fb273c894a16125286f54c1";
 
             $.ajax({
-            url: queryURL,
+            url: weatherQueryURL,
             method: "GET"
             }).then(function(response) {
             console.log(response)
             });
-        }
+
+            var forcastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"&cnt=5&appid=2208febc8fb273c894a16125286f54c1";
+            $.ajax({
+            url: forcastQueryURL,
+            method: "GET"
+            }).then(function(response) {
+            console.log(response)
+            });
+        })
+        // display the current weather
+        // display the 5 day forcast
+        // store searches in local storage
         
     </script>
 </body>
