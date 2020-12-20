@@ -36,17 +36,10 @@
         <div class="col-md-9">Current Weather
             <!-- Current weather display card -->
             <div  class="jumbotron jumbotron-fluid">
-                <div id="weather-display" class="container">
-                  <!-- <h1 class="display-4">Atlanta date icon</h1>
-                  <p class="lead">Temperature: 90 F</p>
-                  <p class="lead">Humidity: 40%</p>
-                  <p class="lead">Wind Speed: 4.7 MPH</p>
-                  <p class="lead">UV Index: 9.49</p> -->
-
-                </div>
-              </div>
-
+                <div id="weather-display" class="container"></div>
+            </div>
             <!-- 5 Day forcast -->
+            <div id="forecast-display" class="container"></div>
         </div>
     </div>
 
@@ -75,8 +68,8 @@
             var uv = "UV Index: "
 
             // display the current weather
-            var titleDiv = $("<div>")
-            titleDiv.attr("class", "display-4")
+            var titleDiv = $("<h1>")
+            // titleDiv.attr("class", "display-4")
             titleDiv.html(title)
             $("#weather-display").append(titleDiv)
             
@@ -109,7 +102,40 @@
             }).then(function(forecastResponse) {
             console.log(forecastResponse)
             // display the 5 day forcast
+            var forecastHeading = $("<div>")
+            forecastHeading.html("<h3>5-Day Forecast:</h3>")
+            $("#forecast-display").append(forecastHeading);
+            var forecastCard = $("<div>")
+            forecastCard.attr("class", "card")
+            forecastCard.attr("style", "width: 18rem;")
+            $("#forecast-display").append(forecastCard)
 
+                var forecastDiv = $("<div>")
+                forecastDiv.attr("class", "card-body")
+                forecastCard.append(forecastDiv)
+                
+                    var forecastDivDate = $("<h5>")
+                    forecastDivDate.attr("class", "card-title")
+                    forecastDivDate.html("<p>Date placeholder</p>")
+                    forecastDiv.append(forecastDivDate)
+
+                    var forecastDivIcon = $("<p>")
+                    forecastDivIcon.attr("class", "card-text")
+                    forecastDivIcon.html("<p>icon placeholder</p>")
+                    forecastDiv.append(forecastDivIcon)
+
+                    var forecastDivTemp = $("<p>")
+                    forecastDivTemp.attr("class", "card-text")
+                    forecastDivTemp.html("<p>temp placeholder</p>")
+                    forecastDiv.append(forecastDivTemp)
+
+                    var forecastDivHumidity = $("<p>")
+                    forecastDivHumidity.attr("class", "card-text")
+                    forecastDivHumidity.html("<p>Humidity placeholder</p>")
+                    forecastDiv.append(forecastDivHumidity)
+
+            
+                
             });
         // display city name is past searches 
             var newDiv = $("<div>")
